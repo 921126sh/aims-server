@@ -1,1 +1,1 @@
-1. oo프로젝트 oo-server입니다.
+1. aims프로젝트 aims-server입니다.
