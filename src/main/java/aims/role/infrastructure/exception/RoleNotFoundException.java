@@ -3,8 +3,8 @@ package aims.role.infrastructure.exception;
 import aims.core.infrastructure.exception.NotFoundDataException;
 
 public class RoleNotFoundException extends NotFoundDataException {
-    private static final long serialVersionUID = 5553111688636277836L;
-    
+    private static final long serialVersionUID = 5890910652008627415L;
+
     /**
      * 오류코드 초기화하는 생성자이다.
      * 

@@ -4,7 +4,7 @@ import aims.core.infrastructure.exception.NotFoundDataException;
 
 public class MnuNotFoundException extends NotFoundDataException {
     private static final long serialVersionUID = 5553111688636277836L;
-    
+
     /**
      * 오류코드 초기화하는 생성자이다.
      * 

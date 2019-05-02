@@ -3,7 +3,7 @@ package aims.role.infrastructure.exception;
 import aims.core.infrastructure.exception.DuplicateDataException;
 
 public class RoleDuplicateException extends DuplicateDataException {
-    private static final long serialVersionUID = 7244750658965917291L;
+    private static final long serialVersionUID = -7901296683270357357L;
 
     /**
      * 오류코드 초기화하는 생성자이다.
