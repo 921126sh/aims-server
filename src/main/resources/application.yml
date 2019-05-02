@@ -24,7 +24,7 @@ server:
 jwt:
   token:
     header: X-Auth-Token
-    secret: manager?dev?oo
+    secret: manager?dev?aims
     expiration: 604800
     origin: aims
 
