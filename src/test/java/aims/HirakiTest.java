@@ -57,7 +57,6 @@ public class HirakiTest {
                             con.close();
                         }
                     } catch (SQLException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -69,10 +68,11 @@ public class HirakiTest {
             thread[i] = new Thread(run[i]);
             thread[i].start();
             thread[i].join();
+            System.out.println(i);
         }
 
         long end = System.currentTimeMillis();
-        System.out.println(dataSource);
-        System.out.println(end - start);
+        System.out.println(String.format("dataSource NAME::::: %s   ", dataSource));
+        System.out.println(String.format("TIME %d", end - start));
     }
 }

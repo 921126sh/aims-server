@@ -68,7 +68,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create # create | create-drop | none \ update | validate
+      ddl-auto: validate # create | create-drop | none \ update | validate
   jackson:
     default-property-inclusion=non_null:
 
@@ -84,9 +84,17 @@ spring:
 spring:
   profiles: tst
   datasource:
+    tomcat:
+      initial-size: 15
+      max-wait: 20000
+      max-active: 50
+      max-idle: 15
+      min-idle: 8
+      default-auto-commit: true
     url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8&serverTimezone=UTC
     username: tester
     password: qwert12345
+    type: org.apache.tomcat.jdbc.pool.DataSource
 
   jpa:
     hibernate:
