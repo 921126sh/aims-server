@@ -62,9 +62,28 @@ spring:
 spring:
   profiles: dev
   datasource:
+#    tomcat:
+#      initial-size: 15
+#      max-wait: 20000
+#      max-active: 50
+#      max-idle: 15
+#      min-idle: 8
+#      default-auto-commit: true
+#    type: org.apache.tomcat.jdbc.pool.DataSource
+    hikari:
+      pool-name: hikari-cp
+      maximum-pool-size: 30
+      minimum-idle: 2
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
     url: jdbc:mysql://localhost:3306/test?useSSL=false
+
     username: tester
     password: qwert12345
+
 
   jpa:
     hibernate:
@@ -84,21 +103,15 @@ spring:
 spring:
   profiles: tst
   datasource:
-    tomcat:
-      initial-size: 15
-      max-wait: 20000
-      max-active: 50
-      max-idle: 15
-      min-idle: 8
-      default-auto-commit: true
-    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/test?useSSL=false
     username: tester
     password: qwert12345
-    type: org.apache.tomcat.jdbc.pool.DataSource
 
   jpa:
     hibernate:
-      ddl-auto: create # create | create-drop | none \ update | validate
+      ddl-auto: validate # create | create-drop | none \ update | validate
+  jackson:
+    default-property-inclusion=non_null:
 
   logging:
     level:
