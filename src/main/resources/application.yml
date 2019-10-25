@@ -22,6 +22,7 @@ jwt:
 sys:
   msg:
     error: \uC694\uCCAD\uC744 \uCC98\uB9AC\uD558\uB358 \uC911 \uC54C\uC218 \uC5C6\uB294 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4.<br>\uC2DC\uC2A4\uD15C\uAD00\uB9AC\uC790\uC5D0\uAC8C \uBB38\uC758 \uD558\uC2ED\uC2DC\uC624.
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ####################################################################################
 #                                    DEFAULT                                       #
@@ -29,16 +30,16 @@ sys:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 spring:
   profiles:
-    active: dev
+    active: loc
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
 #      naming:
         # [물리] 스네이크 -> 카멜 케이스로 변경
-#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         # [논리]
-#        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: false
@@ -49,27 +50,20 @@ spring:
         # 콘솔에 표시되는 쿼리를 가독성 있게 표시
         format_sql: true
         # laze loading 전략 사용
-        enable_lazy_load_no_trans: true보
+        enable_lazy_load_no_trans: true
 
 # 버전정보
 ks.info.version: 1.0.0
+
 ---
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ####################################################################################
-#                                    DEV                                           #
+#                                    LOC                                           #
 ####################################################################################
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 spring:
-  profiles: dev
+  profiles: loc
   datasource:
-#    tomcat:
-#      initial-size: 15
-#      max-wait: 20000
-#      max-active: 50
-#      max-idle: 15
-#      min-idle: 8
-#      default-auto-commit: true
-#    type: org.apache.tomcat.jdbc.pool.DataSource
     hikari:
       pool-name: hikari-cp
       maximum-pool-size: 30
@@ -79,9 +73,9 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
-    url: jdbc:mysql://localhost:3306/ks_db?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
-    username: ks_user
-    password: qwert12345
+    url: jdbc:mysql://localhost:3306/koobstore?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    username: ikoob
+    password: ikoob21
 
   jpa:
     hibernate:
@@ -89,6 +83,36 @@ spring:
   #jackson:
     # null인 데이터 제외
   #  default-property-inclusion: non_null
+
+  logging:
+    level:
+      org:
+        hibernate: info
+---
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+####################################################################################
+#                                    DEV                                           #
+####################################################################################
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+spring:
+  profiles: dev
+  datasource:
+    hikari:
+      pool-name: hikari-cp
+      maximum-pool-size: 30
+      minimum-idle: 2
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+    url: jdbc:mysql://192.168.1.65:3306/koobstore?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    username: ikoob
+    password: ikoob21
+
+  jpa:
+    hibernate:
+      ddl-auto: validate # create | create-drop | none \ update | validate
 
   logging:
     level:
@@ -104,9 +128,9 @@ spring:
 spring:
   profiles: test
   datasource:
-    url: jdbc:mysql://localhost:3306/ks_db?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
-    username: ks_user
-    password: qwert12345
+    url: jdbc:mysql://192.168.1.65:3306/koobstore?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    username: ikoob
+    password: ikoob21
 
   logging:
     level:
@@ -122,9 +146,9 @@ spring:
 spring:
   profiles: prod
   datasource:
-    url: jdbc:mysql://localhost:3306/ks_db?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
-    username: ks_user
-    password: qwert12345
+    url: jdbc:mysql://192.168.1.65:3306/koobstore?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    username: ikoob
+    password: ikoob21
 
   logging:
     level:

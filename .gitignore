@@ -24,6 +24,15 @@ rebel.xml
 **/target
 
 # Gradle
+.gradle
 .gradle/
-/build/
+build/
+
+### Gradle Patch ###
+**/build/
+
+# Cache of project
 .gradletasknamecache
+
+# Mac OS
+*.DS_Store
