@@ -24,7 +24,6 @@ rebel.xml
 **/target
 
 # Gradle
-.gradle
-**/.gradle/
+.gradle/
 /build/
 .gradletasknamecache
