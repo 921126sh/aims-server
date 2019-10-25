@@ -2,10 +2,16 @@
 <!DOCTYPE xml>
 <configuration debug="true">
     <!-- logging-path for enviroment -->
-    <springProfile name="test,prod">
+    <springProfile name="loc">
         <property name="LOG_DIR" value="logs" />
     </springProfile>
     <springProfile name="dev">
+        <property name="LOG_DIR" value="logs" />
+    </springProfile>
+    <springProfile name="test">
+        <property name="LOG_DIR" value="logs" />
+    </springProfile>
+    <springProfile name="prod">
         <property name="LOG_DIR" value="logs" />
     </springProfile>
     <property name="LOG_PATH_NAME" value="${LOG_DIR}/ks-service.log" />
@@ -144,8 +150,8 @@
         </root>
     </springProfile>
     
-    <!-- logging for dev -->
-    <springProfile name="dev">
+    <!-- logging for loc,dev -->
+    <springProfile name="loc,dev">
         <!-- Loggers -->
         <logger name="org.springframework.core" level="info" additivity="false">
             <appender-ref ref="dailyRollingFileAppender" />
