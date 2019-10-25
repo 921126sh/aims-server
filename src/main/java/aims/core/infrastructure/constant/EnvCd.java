@@ -3,16 +3,20 @@ package aims.core.infrastructure.constant;
 import lombok.Getter;
 
 /**
- * 환경코드 개발(D): {@link EnvCd#Develop}, 테스트(T): {@link EnvCd#Test}, 스테이징(S): {@link EnvCd#Staging}, 교육(E): {@link EnvCd#Education}, 운영(P): {@link EnvCd#Production})에 대한 열거형 상수이다.
- * 
+ * 환경코드 개발(loc): {@link EnvCd#Local}, 개발(dev): {@link EnvCd#Develop}, 테스트(test): {@link EnvCd#Test}, 스테이징(stg) {@link EnvCd#Staging}, 교육(edu): {@link EnvCd#Education}, 운영(prod): {@link EnvCd#Production})에 대한 열거형 상수이다.
+ *
  * @author jjh
  */
 public enum EnvCd {
     /**
      * 개발
      */
+    Local("loc", "로컬"),
+    /**
+     * 개발
+     */
     Develop("dev", "개발"),
-    
+
     /**
      * 테스트
      */
