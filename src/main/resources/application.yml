@@ -30,7 +30,7 @@ sys:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 spring:
   profiles:
-    active: loc
+    active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
@@ -88,6 +88,10 @@ spring:
     level:
       org:
         hibernate: info
+
+koob:
+  common:
+    client: D:\temp\aims-server\downStore
 ---
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ####################################################################################
