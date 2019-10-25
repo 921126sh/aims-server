@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 기본 최상위 예외 클래스이다.
  * 
- * @author itt
+ * @author jjh
  */
 public class BaseRuntimeException extends RuntimeException {
     private static final long serialVersionUID = 7573117166365607364L;

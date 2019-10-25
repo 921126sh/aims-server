@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
  * 시스템 정보을 제공하는 서비스 오브젝트이다.
  * 
- * @author itt
+ * @author jjh
  */
 @Service("systemInfo")
 public class SystemInfoImpl implements SystemInfo {

@@ -29,6 +29,9 @@ dependencies {
 	compile group: 'org.pojomatic', name: 'pojomatic', version: '2.0.1'
  	//bridge logging from JCL to SLF4j
  	compile 'org.slf4j:jcl-over-slf4j:1.7.24'
+	//Logback
+	compile 'ch.qos.logback:logback-classic:1.1.11'
+
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.4.RELEASE'
 	testCompile group: 'junit', name: 'junit', version: '4.12'
 
@@ -57,7 +60,7 @@ dependencies {
     
     // DB
     compile("org.springframework.boot:spring-boot-starter-jdbc:2.0.1.RELEASE")
-    compile("mysql:mysql-connector-java:5.1.46")
+    compile("mysql:mysql-connector-java:8.0.18")
      
     //JSON Token
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'

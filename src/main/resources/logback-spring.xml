@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration debug="true">
+    <!-- logging-path for enviroment -->
+    <springProfile name="test,prod">
+        <property name="LOG_DIR" value="logs" />
+    </springProfile>
+    <springProfile name="dev">
+        <property name="LOG_DIR" value="logs" />
+    </springProfile>
+    <property name="LOG_PATH_NAME" value="${LOG_DIR}/ks-service.log" />
+    <property name="ERROR_LOG_PATH_NAME" value="${LOG_DIR}/ks-error.log" />
+    <property name="AUDIT_LOG_PATH_NAME" value="${LOG_DIR}/ks-audit.log" />
+    
+    <!-- Default Console Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    
+    <!-- Service Log File Appender -->
+    <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH_NAME}</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_PATH_NAME}-%d{yyyyMMdd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 200MB -->
+                <maxFileSize>200MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- Service Error Log File Appender -->
+    <appender name="dailyRollingErrorFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${ERROR_LOG_PATH_NAME}</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${ERROR_LOG_PATH_NAME}-%d{yyyyMMdd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 200MB -->
+                <maxFileSize>200MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    
+    <!-- Audit Log File Appender -->
+    <appender name="dailyRollingAuditFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${AUDIT_LOG_PATH_NAME}</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${AUDIT_LOG_PATH_NAME}-%d{yyyyMMdd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 200MB -->
+                <maxFileSize>200MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %X{userip} %X{userid} %replace(%msg){'(?!\B)(\d{6})(\d{7,})', '$1*******'}%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- logging for test, product -->
+    <springProfile name="test,prod">
+        <!-- Loggers -->
+        <logger name="org.springframework.core" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.beans" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.context" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.web" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.security" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="java.sql" level="debug" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <!-- SQL 로그 -->
+        <logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.hibernate.type.BasicTypeRegistry" level="warn" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="aims" level="debug" additivity="false">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <!-- JDBC SQL 로그 -->
+        <!-- <logger name="org.springframework.jdbc.core" level= "debug" additivity="true"> -->
+        <!-- </logger> -->
+        <!-- JDBC SQL 파라메터 로그 -->
+        <!-- <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level= "trace" additivity="true"> -->
+        <!-- </logger> -->
+        <!-- 파라미터와 결과 로그 -->
+        <!-- <logger name="org.hibernate.type" level= "trace" additivity="false"> -->
+        <!-- <appender-ref ref="dailyRollingFileAppender" /> -->
+        <!-- </logger> -->                
+        <!-- Audit Logger -->
+        <logger name="AuditLogger">
+            <level value="info" />
+            <appender-ref ref="dailyRollingAuditFileAppender" />
+        </logger>
+        <root level="info">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </root>
+    </springProfile>
+    
+    <!-- logging for dev -->
+    <springProfile name="dev">
+        <!-- Loggers -->
+        <logger name="org.springframework.core" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.beans" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.context" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.web" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.springframework.security" level="info" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="java.sql" level="debug" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <!-- SQL 로그 -->
+        <logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <logger name="org.hibernate.type.BasicTypeRegistry" level="warn" additivity="false">
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <!-- JDBC SQL 로그 -->
+        <!-- <logger name="org.springframework.jdbc.core" level= "debug" additivity="true"> -->
+        <!-- </logger> -->
+        <!-- JDBC SQL 파라메터 로그 -->
+        <!-- <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level= "trace" additivity="true"> -->
+        <!-- </logger> -->
+        <!-- 파라미터와 결과 로그 -->
+        <!-- <logger name="org.hibernate.type" level= "trace" additivity="false">  -->
+        <!-- <appender-ref ref="dailyRollingFileAppender" /> -->
+        <!-- </logger> -->        
+        <logger name="aims" level="debug" additivity="false">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </logger>
+        <!-- Audit Logger -->
+        <logger name="AuditLogger">
+            <level value="info" />
+            <appender-ref ref="dailyRollingAuditFileAppender" />
+        </logger>
+        <root level="info">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="dailyRollingFileAppender" />
+            <appender-ref ref="dailyRollingErrorFileAppender" />
+        </root>
+    </springProfile>
+</configuration>

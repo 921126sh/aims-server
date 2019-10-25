@@ -4,8 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 
+import java.io.Serializable;
+
 @NoRepositoryBean
-public interface DomainRepository<ENTITY extends DomainEntity<PK>, PK extends DomainIdentity> extends JpaRepository<ENTITY, PK>, JpaSpecificationExecutor<ENTITY> {
+public interface DomainRepository<ENTITY extends DomainEntity<IDENTITY>, IDENTITY extends Serializable> extends JpaRepository<ENTITY, IDENTITY>, JpaSpecificationExecutor<ENTITY> {
 //	public interface BaseRepository<ENTITY extends BaseDomainEntity<PK>, PK extends BaseDomainPK> extends JpaRepository<ENTITY, PK>, JpaSpecificationExecutor<ENTITY>, QueryDslPredicateExecutor<ENTITY> {
 //    /**
 //     * Special customization of {@link org.springframework.data.jpa.repository.CrudRepository#findOne(java.io.Serializable)} to return a JDK 8 {@link java.util.Optional}.

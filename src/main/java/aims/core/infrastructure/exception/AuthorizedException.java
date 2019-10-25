@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package aims.core.infrastructure.exception;
 
@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 런타임(unchecked) 예외 계열의 데이터 위반 예외 오브젝트이다.
  * 
- * @author itt
+ * @author jjh
  */
 public class AuthorizedException extends BaseRuntimeException {
     private static final long serialVersionUID = 7573117166365607364L;

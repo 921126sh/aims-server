@@ -28,7 +28,7 @@ public class UserAwareService {
      * @param user 사용자
      */
     public void newSave(User user) {
-        checkDuplicate(user.getUserId());
+        checkDuplicate(user.getIdentity().getUserId());
         save(user);
     }
     
@@ -69,7 +69,7 @@ public class UserAwareService {
      * @return 사용자
      */
     public User find(String userId, String errCd) {
-        User user = userRepository.findByUserId(userId);
+        User user = userRepository.findByIdUserId(userId);
         
         if (null == user) {
             throw new UserNotFoundException(errCd, new Object[]{userId});
@@ -95,7 +95,7 @@ public class UserAwareService {
      * @param errCd 에러코드
      */
     public void checkDuplicate(final String userId, String errCd) {
-    	final User user = userRepository.findByUserId(userId);
+    	final User user = userRepository.findByIdUserId(userId);
         
         if (null != user) {
             throw new UserDuplicateException(String.format(errCd, userId));

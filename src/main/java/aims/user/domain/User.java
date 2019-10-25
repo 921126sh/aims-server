@@ -5,21 +5,14 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import aims.core.infrastructure.sysauth.SystemInfo;
+import aims.user.api.dto.UserRequest;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import aims.core.domain.DomainEntity;
-import aims.core.infrastructure.constant.UserDiv;
-import aims.user.api.dto.UserRequest;
-import aims.core.infrastructure.sysauth.SystemInfo;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 사용자 도메인의 사용자 엔티티 오브젝트이다.
@@ -27,7 +20,8 @@ import lombok.RequiredArgsConstructor;
  * @author sh
  */
 @Entity
-@Table(name = "TB_USER")
+@Table(name = "tb_user")
+@ToString(callSuper = true)
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
@@ -38,60 +32,54 @@ public class User extends DomainEntity<UserIdentity> {
      * 사용자엔티티PK
      */
     @EmbeddedId
-    private UserIdentity uid = new UserIdentity();
-    
-    /**
-     * 사용자식별자
-     */
     @NonNull
-    @Getter
-    @Column(name = "user_id", length = 36, nullable = false, unique = true)
-    private String userId;
-    
+    private UserIdentity id;
+
     /**
-     * 사용자명
+     * 사용자 명
      */
-    @NonNull
     @Getter
+    @NonNull
     @Column(name = "user_nm", length = 50, nullable = false)
     private String userNm;
     
     /**
      * 사용자패스워드
      */
-    @NonNull
     @Getter
-    @Column(name = "user_pw", length = 100, nullable = false)
-    private String userPw;
-    
-    /**
-     * 사용자구분
-     */
     @NonNull
-    @Getter
-    @Column(name = "USER_DIV", nullable = false, length = 10)
-    @Enumerated(EnumType.STRING)
-    private UserDiv userDiv;
-    
-    
+    @Column(name = "user_pwd", length = 15, nullable = false)
+    private String userPwd;
+
+    @Override 
+    public UserIdentity getIdentity() {
+        return this.id;
+    }
+
     /**
      * 사용자 엔티티 정보를 변경한다.
-     * 
+     *
      * @param userRequest 사용자 요청 데이터
      * @param systemInfo 시스템정보
      */
     public void modify(UserRequest userRequest, SystemInfo systemInfo) {
+
     }
 
-    @Override
-    public UserIdentity getUid() {
-        return uid;
+    /**
+     *사용자 엔티티 정보를 변경한다.
+     *
+     * @param userNm 사용자명
+     */
+    public void modify(String userNm) {
     }
 
-    public void chgUserInfo(String userId, String userNm, String pwd, UserDiv userDiv) {
-        this.userId = userId;
-        this.userNm = userNm;
-        this.userPw = pwd;
-        this.userDiv = userDiv;
+    /**
+     * 패스워드를 변경한다.
+     *
+     * @param newPwd 신규 패스워드
+     */
+    public void chgPwd(String newPwd) {
+        this.userPwd = newPwd;
     }
 }

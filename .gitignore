@@ -1,3 +1,4 @@
-/.classpath
-/.project
 /bin/
+/logs/*.log
+/logs/*.log.*
+/.gradle/

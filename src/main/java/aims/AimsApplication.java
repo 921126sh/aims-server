@@ -15,11 +15,10 @@ public class AimsApplication extends SpringBootServletInitializer {
     
     @Override
 	protected SpringApplicationBuilder configure (SpringApplicationBuilder application) {
-		return application.sources(AimsApplication.class);
+    	return application.sources(AimsApplication.class);
 	}
 
     public static void main(String[] args) {
-    	System.setProperty("spring.devtools.restart.enabled", "false");
     	SpringApplication.run(AimsApplication.class, args);
     }
 }

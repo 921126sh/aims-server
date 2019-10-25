@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import lombok.Getter;
 
 /**
- * @author itt
+ * @author jjh
  *
  */
 public class AuthUserVo extends User {
@@ -30,11 +30,6 @@ public class AuthUserVo extends User {
      * @param accountNonExpired 사용자계정만료이전여부
      * @param credentialsNonExpired 사용자인증말료이전여부
      * @param accountNonLocked 사용자계정미제한 여부
-     * @param expYmd 계정만료일자
-     * @param chgPwdYmd 비밀번호 변경일자
-     * @param pwdExpDay 비밀번호 변경 만료일자
-     * @param userDiv 사용자구분
-     * @param authorities 사용자역할목록
      */
 	public AuthUserVo(String userId, String userNm, String password, boolean enabled, boolean accountNonExpired, 
 	        boolean credentialsNonExpired, boolean accountNonLocked) {

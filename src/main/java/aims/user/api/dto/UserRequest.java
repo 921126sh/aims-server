@@ -16,15 +16,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserRequest extends BaseRequestDto {
     private static final long serialVersionUID = -6204119528714772034L;
-    
-    /**
-     * 원 사용자 식별자를 반환한다.
-     * 
-     * @return 원 사용자 식별자
-     */
-    public String getOrgUserId() {
-        return userId;
-    }
 
     /**
      * 사용자 식별자
@@ -46,11 +37,4 @@ public class UserRequest extends BaseRequestDto {
     @Setter
     @Getter
     private String pwd;
-    
-    /**
-     * 사용자구분
-     */
-    @Getter
-    @Setter
-    private UserDiv userDiv = UserDiv.ADMIN;
 }

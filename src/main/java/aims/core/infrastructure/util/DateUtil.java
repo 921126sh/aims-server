@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 /**
  * 일자관련한 기능을 제공하는 유틸리티이다.
  * 
- * @author itt
+ * @author jjh
  */
 public class DateUtil {
 	/**
@@ -289,7 +289,7 @@ public class DateUtil {
 	/**
 	 * 주어진 일자형식으로 문자열로 구성된 일자를 실제 일자로 변환하여 반환한다.
 	 * 
-	 * @param pattern
+	 * @param format
 	 *            일자형식
 	 * @param date
 	 *            문자열로 구성된 일자
@@ -314,7 +314,7 @@ public class DateUtil {
 	/**
 	 * 주어진 일자형식으로 일자를 변환하여 반환한다.
 	 * 
-	 * @param pattern
+	 * @param format
 	 *            일자형식
 	 * @param date
 	 *            일자

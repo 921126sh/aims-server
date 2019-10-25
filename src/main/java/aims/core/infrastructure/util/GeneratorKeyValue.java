@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * 식별자를 채번하는 유틸리티이다.
  * 
- * @author itt
+ * @author jjh
  */
 public final class GeneratorKeyValue {
 	public GeneratorKeyValue() {

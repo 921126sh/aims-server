@@ -1,5 +1,6 @@
 package aims.user.application;
 
+import aims.user.domain.UserIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +31,7 @@ public class ChangeUserService {
     public void registerUser(UserRequest request) {
         // EBUSRS006 : 등록할 사용자 식별자(%s)가 입력되지 않았습니다.
         CheckUtil.checkArgumentNullOrEmpty(request.getUserId(), UsrErrCd.EBUSRS006.name());
-        
-        User user = User.of(request.getUserId(), request.getUserNm(), request.getPwd(), request.getUserDiv());
+        User user = User.of(new UserIdentity(request.getUserId()), request.getUserNm(), request.getPwd());
         userAwareService.newSave(user);
     }
     
@@ -47,7 +47,7 @@ public class ChangeUserService {
         User user = userAwareService.find(userId);
         userAwareService.checkEditDuplicate(userId, request.getUserId());
         
-        user.chgUserInfo(request.getUserId(), request.getUserNm(), request.getPwd(), request.getUserDiv());
+        user.modify(request.getUserNm());
     }
     
     /**

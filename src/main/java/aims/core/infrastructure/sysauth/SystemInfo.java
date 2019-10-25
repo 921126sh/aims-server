@@ -3,7 +3,7 @@ package aims.core.infrastructure.sysauth;
 /**
  * 시스템 정보을 제공하는 서비스 인터페이스이다.
  * 
- * @author itt
+ * @author jjh
  */
 public interface SystemInfo {
     /**

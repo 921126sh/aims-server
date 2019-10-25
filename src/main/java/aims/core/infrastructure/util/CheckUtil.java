@@ -1,5 +1,7 @@
 package aims.core.infrastructure.util;
 
+import aims.core.infrastructure.exception.IllegalArgException;
+
 import java.util.Collection;
 
 import javax.annotation.Nullable;
@@ -8,7 +10,7 @@ import javax.annotation.Nullable;
 /**
  * 검사 관련한 기능을 제공하는 유틸리티이다.
  * 
- * @author itt
+ * @author jjh
  */
 public class CheckUtil {
     private CheckUtil() {
@@ -48,7 +50,7 @@ public class CheckUtil {
     /**
      * 주어진 인자 목록의 하나라도 NULL 또는 공백이면 에외를 발생시킨다.
      * 
-     * @param arg 체크할 인자 목록
+     * @param args 체크할 인자 목록
      * @param errCd 오류코드
      * @throws IllegalArgException 인자가 NULL 또는 공백이면 발생되어진다.
      */

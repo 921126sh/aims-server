@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 런타임(unchecked) 예외 계열의 잘못된 인자에 대한 예외 오브젝트이다.
  * 
- * @author itt
+ * @author jjh
  */
 public class IllegalArgException extends BaseRuntimeException {
 	private static final long serialVersionUID = 7407331591921329626L;
