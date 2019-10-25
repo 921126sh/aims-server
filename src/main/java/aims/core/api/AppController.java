@@ -39,13 +39,7 @@ public class AppController {
      */
     @Autowired
     private Environment environment;
-    
-    /**
-     * 매니져 릴리즈 디렉토리
-     */
-    @Value("${fever.common.release-dir}")
-    private String ROOT_FILE_PATH;
-    
+
     /**
      * 서버 버전정보
      */
