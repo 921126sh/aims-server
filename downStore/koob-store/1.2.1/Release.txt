@@ -1,0 +1,6 @@
+{
+    "version" : "1.2.1",
+    "fileName" : "koob-client-update-1.2.1.zip",
+    "date" : "20170810",
+    "notableChanges" : []
+}
